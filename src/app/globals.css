@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nav-h: 72px;
+    color-scheme: dark;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+  }
+
+  body {
+    @apply bg-night-900 font-sans text-cream-100 antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    @apply bg-berry-400/30 text-night-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-grape-500 ring-offset-2 ring-offset-cream-100;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-semibold tracking-tight text-night-900;
+    color: #fffdf9;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-7 lg:px-10;
+  }
+
+  .shell-wide {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-7 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex w-fit max-w-full items-center gap-2 rounded-full border border-grape-400/20 bg-cream-100/8 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-cream-200/80 backdrop-blur;
+  }
+
+  .card-surface {
+    @apply relative overflow-hidden rounded-[28px] border border-grape-400/16 bg-night-800/75 shadow-soft backdrop-blur-sm;
+  }
+
+  .paper-surface {
+    @apply relative rounded-[28px] border border-grape-400/18 shadow-paper;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(167, 139, 250, 0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(244, 114, 182, 0.12), transparent 45%),
+      linear-gradient(180deg, rgba(21, 13, 36, 0.96), rgba(8, 4, 15, 0.98));
+  }
+
+  .paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-ember-500 via-berry-500 to-grape-500 bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: shimmer 8s linear infinite;
+  }
+
+  .btn-base {
+    @apply relative inline-flex select-none items-center justify-center gap-2 rounded-full text-sm font-semibold transition-all duration-300 will-change-transform active:scale-[0.97];
+  }
+
+  .btn-primary {
+    @apply btn-base bg-grape-400 px-6 py-3.5 text-night-900 shadow-lift hover:bg-grape-500 hover:text-cream-50 hover:shadow-glow;
+  }
+
+  .btn-ghost {
+    @apply btn-base border border-grape-400/20 bg-cream-100/8 px-5 py-3 text-cream-100 backdrop-blur hover:-translate-y-0.5 hover:border-grape-400/45 hover:bg-cream-100/12;
+  }
+
+  .hairline {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(31, 20, 54, 0.18),
+      transparent
+    );
+    height: 1px;
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body.theme-violet {
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgba(139, 92, 246, 0.24), transparent 62%),
+    radial-gradient(45% 40% at 12% 32%, rgba(244, 82, 122, 0.12), transparent 65%),
+    linear-gradient(180deg, #08040f 0%, #12091f 52%, #08040f 100%);
+  background-size: 130% 130%, 120% 120%, 100% 100%;
+  animation: violet-ambient 18s ease-in-out infinite alternate;
+}
+
+body.theme-violet main {
+  background: transparent;
+}
+
+@keyframes violet-ambient {
+  0% {
+    background-position: 50% 0%, 0% 35%, 0 0;
+  }
+  100% {
+    background-position: 45% 8%, 12% 24%, 0 0;
+  }
+}
+
+@layer utilities {
+  .text-shadow-hero {
+    text-shadow: 0 12px 44px rgba(11, 7, 19, 0.42);
+  }
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- FX keyframes ---------- */
+@keyframes lily-balloon-rise {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(var(--drift), -55vh, 0) rotate(4deg);
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -125vh, 0) rotate(-3deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lily-balloon-sway {
+  0%,
+  100% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes lily-spark-burst {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes lily-float-up {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-220px) rotate(240deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lily-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 220% 50%;
+  }
+}
+
+/* ---------- Birthday candle (4DX reference animation) ---------- */
+@keyframes candle-entrance {
+  0% {
+    transform: scale3d(0, 0, 0) rotateY(-90deg) translateY(200px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale3d(1.1, 1.1, 1.1) rotateY(15deg) translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale3d(1, 1, 1) rotateY(0deg) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes candle-ignite {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes candle-flame-4d {
+  0% {
+    transform: scale(1) rotate(-3deg) skewX(-2deg);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  }
+  25% {
+    transform: scaleX(0.95) scaleY(1.05) translateZ(5px) rotate(2deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(-5deg) skewX(4deg) translateY(-2px);
+    border-radius: 45% 55% 35% 35% / 65% 55% 45% 35%;
+  }
+  75% {
+    transform: scaleX(1.02) scaleY(0.98) translateZ(-5px) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(-2deg) skewX(-3deg);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  }
+}
+
+@keyframes candle-glow {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes candle-wiggle {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -3deg;
+  }
+  50% {
+    rotate: 3deg;
+  }
+  75% {
+    rotate: -2deg;
+  }
+}
